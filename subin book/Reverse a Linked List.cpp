@@ -5,55 +5,45 @@ class Node{
 public:
     int data;
     Node* next;
+    Node(int data){
+        this->data = data;
+        next = NULL;
+    }
 };
 
-void push(Node** n, int new_data){
-    Node* new_node = new Node();
-    Node* last = *n;
-    new_node->data = new_data;
-    new_node->next = NULL;
-    if(*n == NULL){
-        *n = new_node;
-        return;
-    }
-    while(last->next != NULL){
-        last = last->next;
-    }
-    last->next = new_node;
-    return;
-}
-
-void print(Node* n){
-    while(n != NULL){
-      cout<<n->data<<” ”;
-      n = n->next;
+void printlist(Node* n){
+    while(n!=NULL){
+        cout<<n->data<<" ";
+        n = n->next;
     }
     cout<<endl;
 }
 
-void reverse(Node** n){
+Node* rev(Node* n){
     Node* tem = NULL;
     Node* prev = NULL;
-    Node* cur = (*n);
-    while(cur != NULL){
+    Node* cur = n;
+    while(cur!=NULL){
         tem = cur->next;
-        cur->next=prev;
+        cur->next = prev;
         prev = cur;
         cur = tem;
     }
-    *n = prev;
+    return prev;
 }
 
 int main(){
     int i,n,num;
-    Node* head = NULL;
-    cin>>n;
-    for(i=0;i<n;i++){
+    cin>>n>>num;
+    Node* head = new Node(num);
+    Node* tail = head;
+    for(i=0;i<n-1;i++){
         cin>>num;
-        push(&head, num);
+        tail->next = new Node(num);
+        tail = tail->next;
     }
-    print(head);
-    reverse(&head);
-    print(head);
+    printlist(head);
+    head = rev(head);
+    printlist(head);
     return 0;
 }
