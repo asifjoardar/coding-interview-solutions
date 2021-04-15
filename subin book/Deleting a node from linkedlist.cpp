@@ -19,7 +19,7 @@ void printlist(Node* n){
     cout<<endl;
 }
 
-Node del(Node* n, int pos){
+Node* del(Node* n, int pos){
     int i;
     Node* head = n;
     Node* last = n;
@@ -33,7 +33,7 @@ Node del(Node* n, int pos){
 }
 
 int main(){
-    int i,n,num;
+    int i,n,num,pos;
     cin>>n;
     cin>>num;
     Node* head = new Node(num);
